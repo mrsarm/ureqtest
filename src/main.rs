@@ -18,5 +18,5 @@ fn main() {
         res.status().canonical_reason().unwrap_or("")
     );
     let body = res.into_body().read_to_string().unwrap();
-    println!("Body:\n{body}");
+    println!("Body:\n{} ...", &body[0..40]);
 }
