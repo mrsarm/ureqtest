@@ -10,5 +10,13 @@ fn main() {
         .build()
         .into();
 
-    agent.get(url).call().unwrap();
+    let res = agent.get(url).call().unwrap();
+    println!(
+        "Response: {:?} {} {}",
+        res.version(),
+        res.status().as_u16(),
+        res.status().canonical_reason().unwrap_or("")
+    );
+    let body = res.into_body().read_to_string().unwrap();
+    println!("Body:\n{body}");
 }
