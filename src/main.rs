@@ -1,3 +1,4 @@
+use std::cmp::min;
 use std::time::Duration;
 use ureq::Agent;
 
@@ -18,5 +19,5 @@ fn main() {
         res.status().canonical_reason().unwrap_or("")
     );
     let body = res.into_body().read_to_string().unwrap();
-    println!("Body:\n{} ...", &body[0..40]);
+    println!("Body:\n{} ...", &body[0..min(80, body.len())]);
 }
